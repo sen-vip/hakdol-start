@@ -152,7 +152,7 @@ const tools = [
     tags: ["학교회계", "예산", "집행", "결산", "사업관리카드"],
     status: "운영중",
     icon: "📊",
-    url: "https://sen-vip.github.io/budget-visualizer/",
+    url: "https://budget-visualizer-delta.vercel.app/",
     updated: "2026.08"
   },
   {
@@ -185,7 +185,7 @@ const tools = [
     tags: ["공사", "시설", "착공", "준공", "하자", "행정서류"],
     status: "운영중",
     icon: "🏗️",
-    url: "https://sen-vip.github.io/construction-info-hub/",
+    url: "https://construction-info-hub.vercel.app/",
     updated: "2026.08"
   },
   {
@@ -837,7 +837,7 @@ function renderPomodoro(statusMessage = "") {
   pomodoroCard.classList.toggle("is-rest", !isFocus);
   document.title = pomodoro.running
     ? `${formatPomodoro(remaining)} · ${isFocus ? "집중 중" : "휴식 중"} | 학돌시작`
-    : "학돌시작 v0.3.1 | 오늘의 학교 업무 시작점";
+    : "학돌시작 v0.3.2 | 오늘의 학교 업무 시작점";
 }
 
 function stopPomodoroTicker() {

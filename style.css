@@ -561,7 +561,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 
-/* v0.3.1 — 학돌시작: 작은책상 우선 시작페이지 */
+/* v0.3.2 — 학돌시작: 작은책상 우선 시작페이지 */
 .desk-section {
   margin-top: 18px;
   background: rgba(255,255,255,.76);

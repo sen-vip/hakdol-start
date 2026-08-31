@@ -4,6 +4,11 @@
 
 기존 학돌함의 보라·인디고 카드 디자인과 검색/즐겨찾기/작은책상 기능은 살리고, 도구함이 아니라 **업무 시작점**으로 브랜딩과 배치를 다시 구성했습니다.
 
+## v0.3.2 업데이트
+
+- 공사허브 주소를 `https://construction-info-hub.vercel.app/`로 변경했습니다.
+- 학교회계 예산현황판 주소를 `https://budget-visualizer-delta.vercel.app/`로 변경했습니다.
+
 ## v0.3.1 업데이트
 
 - 교육청 법카맵(서울) 주소를 `https://edu-card-map.vercel.app/`로 변경했습니다.
@@ -66,7 +71,7 @@
 ### 링크 메모
 
 - `급여용 초과근무 변환기`는 블로그 상세설명 페이지 공개 후 연결 예정이며 현재 `준비중`으로 표시합니다.
-- `계약서류 작성지원(업체용)`은 `contract-doc-support`, `공사허브`는 `construction-info-hub` 배포 경로로 연결했습니다.
+- `계약서류 작성지원(업체용)`은 기존 배포 경로로, `공사허브`는 `https://construction-info-hub.vercel.app/`로 연결했습니다.
 
 ## 파일
 
