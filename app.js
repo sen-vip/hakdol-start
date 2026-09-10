@@ -37,7 +37,7 @@ const tools = [
     name: "공문핏",
     category: "문서·업무지원",
     description: "공문의 관련·본문·가나다 순번·붙임 번호를 빠르게 정리하는 공문 작성 보조 도구입니다.",
-    tags: ["공문", "가나다", "순번", "붙임", "문서"],
+    tags: ["공문", "공문정리", "기안", "가나다", "순번", "붙임", "문서"],
     status: "운영중",
     icon: "📝",
     url: "https://sen-vip.github.io/gongmun-fit/",
@@ -149,7 +149,7 @@ const tools = [
     name: "학교회계 예산현황판",
     category: "예산·회계",
     description: "사업관리카드와 예산 자료를 바탕으로 예산 현황·집행·결산 예측을 보기 쉽게 확인합니다.",
-    tags: ["학교회계", "예산", "집행", "결산", "사업관리카드"],
+    tags: ["학교회계", "예산", "예산잔액", "잔액", "예상잔액", "집행", "결산", "사업관리카드"],
     status: "운영중",
     icon: "📊",
     url: "https://budget-visualizer-delta.vercel.app/",
@@ -182,7 +182,7 @@ const tools = [
     name: "공사허브",
     category: "공사·시설",
     description: "학교 공사의 계약·착공·준공·하자 단계별 행정서류를 한 흐름에서 확인하고 작성합니다.",
-    tags: ["공사", "시설", "착공", "준공", "하자", "행정서류"],
+    tags: ["공사", "시설", "착공", "준공", "준공서류", "하자", "행정서류"],
     status: "운영중",
     icon: "🏗️",
     url: "https://construction-info-hub.vercel.app/",
@@ -201,13 +201,24 @@ const tools = [
   },
   {
     id: "my-child-school",
-    name: "우리아이학교",
+    name: "우리아이 오늘",
     category: "학교생활",
     description: "자녀의 학교를 등록해 오늘 일정·급식·시간표를 빠르게 확인하는 학부모용 도구입니다.",
     tags: ["우리아이", "학부모", "급식", "시간표", "학사일정"],
     status: "운영중",
     icon: "🏡",
     url: "https://sen-vip.github.io/my-child-today/",
+    updated: "2026.08"
+  },
+  {
+    id: "school-calendar",
+    name: "전국 학사일정",
+    category: "학교생활",
+    description: "학교를 검색해 월별 학사일정을 확인하고 필요한 일정을 복사해 쓰는 도구입니다.",
+    tags: ["학사일정", "학교검색", "달력", "전국", "학년"],
+    status: "운영중",
+    icon: "🗓️",
+    url: "https://sen-vip.github.io/school-calendar/",
     updated: "2026.08"
   },
   {
@@ -223,35 +234,43 @@ const tools = [
   }
 ];
 
-const CATEGORY_ORDER = [
-  "일정·루틴",
-  "문서·업무지원",
-  "인사·급여",
-  "계약·구매",
-  "예산·회계",
-  "공사·시설",
-  "학교생활",
-  "🧪 실험실"
+const WORK_GROUPS = [
+  {
+    id: "routine",
+    name: "업무 시작·루틴",
+    description: "오늘과 연간 업무 흐름을 먼저",
+    toolIds: ["monthly-tasks", "routine", "annual-contract"]
+  },
+  {
+    id: "budget",
+    name: "예산·회계",
+    description: "예산·카드·업무추진비를 판단하기 쉽게",
+    toolIds: ["budget-visualizer", "school-card-map", "edu-card-map"]
+  },
+  {
+    id: "contract",
+    name: "계약·공사·보험",
+    description: "계약부터 공사·보험·버스 서류까지",
+    toolIds: ["contract-kockgum", "contract-doc-support", "construction-hub", "insur-kockgum", "bus-kockgum"]
+  },
+  {
+    id: "document",
+    name: "문서·인사",
+    description: "공문·제출·출장·초과근무·경력 실무",
+    toolIds: ["gongmun-fit", "jechul-moa", "inside-travel-kockgum", "overtime", "career-certificate", "payroll-overtime-converter"]
+  }
 ];
 
-const CATEGORY_DESCRIPTIONS = {
-  "일정·루틴": "오늘과 연간 흐름을 먼저",
-  "문서·업무지원": "공문·제출·출장 실무",
-  "인사·급여": "초과근무·경력·급여",
-  "계약·구매": "계약과 확인 서류",
-  "예산·회계": "예산·카드·업무추진비",
-  "공사·시설": "공사 행정서류 흐름",
-  "학교생활": "학생·학부모용 오늘 정보",
-  "🧪 실험실": "작게 시험 중인 도구"
-};
+const LIFE_TOOL_IDS = ["today-school", "my-child-school", "school-calendar"];
+const LAB_TOOL_IDS = ["ansa"];
 
 const FEATURED_IDS = [
   "monthly-tasks",
-  "routine",
   "gongmun-fit",
-  "jechul-moa",
+  "budget-visualizer",
+  "construction-hub",
   "contract-kockgum",
-  "budget-visualizer"
+  "insur-kockgum"
 ];
 
 const legacyFavorites = localStorage.getItem("hakdolham:favorites");
@@ -263,6 +282,8 @@ const state = {
 
 const featuredGrid = document.querySelector("#featuredGrid");
 const grid = document.querySelector("#toolGrid");
+const lifeGrid = document.querySelector("#lifeToolGrid");
+const labGrid = document.querySelector("#labToolGrid");
 const emptyState = document.querySelector("#emptyState");
 const searchInput = document.querySelector("#searchInput");
 const clearSearchBtn = document.querySelector("#clearSearchBtn");
@@ -357,31 +378,41 @@ function renderToolCard(tool) {
   `;
 }
 
-function renderCategoryRow(category, categoryTools) {
+function renderGroupRow(group, groupTools) {
   return `
-    <section class="tool-category-row" aria-labelledby="category-${category}">
+    <section class="tool-category-row" id="group-${group.id}" aria-labelledby="group-title-${group.id}">
       <div class="tool-category-label">
-        <h3 id="category-${category}">${category}</h3>
-        <p>${CATEGORY_DESCRIPTIONS[category] || ""}</p>
-        <span>${categoryTools.length}개</span>
+        <h3 id="group-title-${group.id}">${group.name}</h3>
+        <p>${group.description}</p>
+        <span>${groupTools.length}개</span>
       </div>
       <div class="category-tool-grid">
-        ${categoryTools.map(renderToolCard).join("")}
+        ${groupTools.map(renderToolCard).join("")}
       </div>
     </section>
   `;
 }
 
-function renderToolBoard() {
-  const visibleTools = tools
-    .filter(tool => !state.favoriteOnly || state.favorites.has(tool.id));
+function renderSecondaryGrid(target, ids, visibleTools) {
+  if (!target) return;
+  const idSet = new Set(ids);
+  const items = visibleTools.filter(tool => idSet.has(tool.id));
+  target.innerHTML = items.map(renderToolCard).join("");
+  target.closest(".secondary-tools")?.classList.toggle("is-empty", items.length === 0);
+}
 
-  const rows = CATEGORY_ORDER.map(category => {
-    const categoryTools = visibleTools.filter(tool => tool.category === category);
-    return categoryTools.length ? renderCategoryRow(category, categoryTools) : "";
+function renderToolBoard() {
+  const visibleTools = tools.filter(tool => !state.favoriteOnly || state.favorites.has(tool.id));
+  const visibleById = new Map(visibleTools.map(tool => [tool.id, tool]));
+
+  grid.innerHTML = WORK_GROUPS.map(group => {
+    const groupTools = group.toolIds.map(id => visibleById.get(id)).filter(Boolean);
+    return groupTools.length ? renderGroupRow(group, groupTools) : "";
   }).join("");
 
-  grid.innerHTML = rows;
+  renderSecondaryGrid(lifeGrid, LIFE_TOOL_IDS, visibleTools);
+  renderSecondaryGrid(labGrid, LAB_TOOL_IDS, visibleTools);
+
   emptyState.hidden = visibleTools.length !== 0;
   favoriteOnlyBtn.classList.toggle("active", state.favoriteOnly);
   favoriteOnlyBtn.setAttribute("aria-pressed", String(state.favoriteOnly));
@@ -480,6 +511,17 @@ clearSearchBtn.addEventListener("click", () => {
   searchInput.value = "";
   searchInput.focus();
   renderSearchResults();
+});
+
+document.querySelectorAll("[data-search-term]").forEach(button => {
+  button.addEventListener("click", () => {
+    const term = button.dataset.searchTerm || "";
+    state.query = term;
+    searchInput.value = term;
+    renderSearchResults();
+    searchInput.focus();
+    searchResults.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
 });
 
 favoriteOnlyBtn.addEventListener("click", () => {
@@ -837,7 +879,7 @@ function renderPomodoro(statusMessage = "") {
   pomodoroCard.classList.toggle("is-rest", !isFocus);
   document.title = pomodoro.running
     ? `${formatPomodoro(remaining)} · ${isFocus ? "집중 중" : "휴식 중"} | 학돌시작`
-    : "학돌시작 v0.3.2 | 오늘의 학교 업무 시작점";
+    : "학돌시작 v0.4.0 | 행정실에서 시작한 실무 도구";
 }
 
 function stopPomodoroTicker() {

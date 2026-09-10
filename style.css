@@ -582,3 +582,115 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @media (max-width: 720px) {
   .desk-section { margin-top: 14px; }
 }
+
+/* v0.4.0 — 학돌랩 브랜드 정립 + 작은책상 → 검색 → 자주 쓰는 도구 흐름 */
+.brand-hero { min-height: 220px; }
+.brand-hero .hero-desc { max-width: 760px; margin-bottom: 12px; }
+.desk-section { margin-top: 18px; background: rgba(255,255,255,.74); }
+
+.discovery-section {
+  margin-top: 22px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: rgba(255,255,255,.88);
+  box-shadow: var(--shadow-soft);
+}
+.discovery-head { margin-bottom: 14px; }
+.discovery-search { max-width: none; }
+.discovery-search #searchInput { min-height: 60px; font-size: 14px; }
+.search-examples { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 10px; color: var(--muted); font-size: 11.5px; }
+.search-examples button {
+  min-height: 29px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #f7f8fb;
+  color: #5f687d;
+  font-size: 11px;
+  font-weight: 800;
+}
+.search-examples button:hover { border-color: rgba(101,88,232,.3); background: var(--violet-soft); color: var(--violet-dark); }
+.discovery-section .search-results { max-width: none; }
+.work-shortcuts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 9px; margin-top: 16px; }
+.work-shortcuts a {
+  display: grid;
+  grid-template-columns: 34px minmax(0,1fr);
+  align-items: center;
+  gap: 0 9px;
+  min-height: 68px;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: #fbfcfe;
+  transition: border-color .16s ease, transform .16s ease, background .16s ease;
+}
+.work-shortcuts a:hover { transform: translateY(-1px); border-color: rgba(101,88,232,.28); background: #f8f7ff; }
+.work-shortcuts a > span { grid-row: 1 / span 2; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: white; font-size: 17px; }
+.work-shortcuts strong { align-self: end; overflow: hidden; font-size: 12.5px; text-overflow: ellipsis; white-space: nowrap; }
+.work-shortcuts small { align-self: start; overflow: hidden; margin-top: 2px; color: var(--muted); font-size: 9.5px; text-overflow: ellipsis; white-space: nowrap; }
+
+.featured-section { margin-top: 26px; }
+.tools-head-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.tools-head-actions .section-desc { max-width: 380px; }
+.secondary-tools { margin-top: 30px; }
+.secondary-tools.is-empty { display: none; }
+.secondary-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+.secondary-grid .compact-tool-card { min-height: 100px; }
+.secondary-grid .tool-card-link { min-height: 100px; }
+.lab-tools { margin-top: 22px; }
+.lab-tools .secondary-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+
+.principles-section {
+  margin-top: 34px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(248,248,253,.92));
+}
+.principles-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.principles-grid article { min-height: 160px; padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: white; }
+.principles-grid article > strong { display: inline-flex; margin-bottom: 18px; color: var(--violet); font-size: 11px; letter-spacing: .08em; }
+.principles-grid h3 { margin: 0; font-size: 15px; letter-spacing: -.04em; }
+.principles-grid p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+.brand-footer { align-items: flex-end; padding-top: 24px; }
+.footer-brand-copy { display: grid; gap: 5px; max-width: 650px; }
+.footer-brand-copy strong { font-size: 13px; }
+.footer-brand-copy span { color: var(--muted); line-height: 1.5; }
+
+/* 4개 업무군에 맞춘 구분 색 */
+.tool-category-row:nth-child(1) .tool-category-label { background: #f2f5ff; }
+.tool-category-row:nth-child(2) .tool-category-label { background: #eef7fb; }
+.tool-category-row:nth-child(3) .tool-category-label { background: #eff8f5; }
+.tool-category-row:nth-child(4) .tool-category-label { background: #fff6ef; }
+
+@media (max-width: 920px) {
+  .work-shortcuts { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .secondary-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 720px) {
+  .discovery-section { padding: 17px; }
+  .tools-head-actions { align-items: flex-start; }
+  .principles-section { padding: 17px; }
+  .principles-grid { grid-template-columns: 1fr; }
+  .principles-grid article { min-height: 0; }
+  .brand-footer { align-items: center; }
+  .footer-brand-copy { text-align: center; }
+}
+
+@media (max-width: 540px) {
+  .brand-hero { min-height: 0; }
+  .brand-hero h1 { font-size: 31px; }
+  .work-shortcuts { grid-template-columns: 1fr 1fr; gap: 7px; }
+  .work-shortcuts a { grid-template-columns: 30px minmax(0,1fr); min-height: 62px; padding: 9px; }
+  .work-shortcuts a > span { width: 30px; height: 30px; font-size: 15px; }
+  .work-shortcuts strong { font-size: 11.5px; }
+  .work-shortcuts small { display: none; }
+  .secondary-grid, .lab-tools .secondary-grid { grid-template-columns: 1fr; }
+  .tools-head-actions { display: flex; margin-top: 9px; }
+  .tools-head-actions .section-desc { display: none; }
+  .search-examples span { width: 100%; }
+  .brand-footer .footer-meta { flex-wrap: wrap; }
+}
