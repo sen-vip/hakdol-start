@@ -583,7 +583,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .desk-section { margin-top: 14px; }
 }
 
-/* v0.4.0 — 학돌랩 브랜드 정립 + 작은책상 → 검색 → 자주 쓰는 도구 흐름 */
+/* v0.4.1 — 전국 학사일정 제거 + 품샷 비공개 카드 추가 */
 .brand-hero { min-height: 220px; }
 .brand-hero .hero-desc { max-width: 760px; margin-bottom: 12px; }
 .desk-section { margin-top: 18px; background: rgba(255,255,255,.74); }

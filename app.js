@@ -123,6 +123,17 @@ const tools = [
     updated: "2026.08"
   },
   {
+    id: "poomshot",
+    name: "품샷",
+    category: "계약·구매",
+    description: "견적서 PDF를 바탕으로 품의서 본문과 에듀파인 업로드용 엑셀 작성을 돕는 도구입니다.",
+    tags: ["품샷", "견적서", "품의", "에듀파인", "엑셀", "구매"],
+    status: "비공개",
+    icon: "📸",
+    url: "",
+    updated: "비공개"
+  },
+  {
     id: "insur-kockgum",
     name: "보험콕검",
     category: "계약·구매",
@@ -148,12 +159,12 @@ const tools = [
     id: "budget-visualizer",
     name: "학교회계 예산현황판",
     category: "예산·회계",
-    description: "사업관리카드와 예산 자료를 바탕으로 예산 현황·집행·결산 예측을 보기 쉽게 확인합니다.",
-    tags: ["학교회계", "예산", "예산잔액", "잔액", "예상잔액", "집행", "결산", "사업관리카드"],
+    description: "복잡한 학교예산을 시각화해 예산 현황·집행·예상 잔액을 더 쉽게 확인합니다.",
+    tags: ["학교회계", "예산", "예산현황판", "예산잔액", "잔액", "예상잔액", "집행", "결산", "사업관리카드", "102-2"],
     status: "운영중",
     icon: "📊",
     url: "https://budget-visualizer-delta.vercel.app/",
-    updated: "2026.08"
+    updated: "2026.09"
   },
   {
     id: "school-card-map",
@@ -211,17 +222,6 @@ const tools = [
     updated: "2026.08"
   },
   {
-    id: "school-calendar",
-    name: "전국 학사일정",
-    category: "학교생활",
-    description: "학교를 검색해 월별 학사일정을 확인하고 필요한 일정을 복사해 쓰는 도구입니다.",
-    tags: ["학사일정", "학교검색", "달력", "전국", "학년"],
-    status: "운영중",
-    icon: "🗓️",
-    url: "https://sen-vip.github.io/school-calendar/",
-    updated: "2026.08"
-  },
-  {
     id: "ansa",
     name: "안 샀다",
     category: "🧪 실험실",
@@ -251,7 +251,7 @@ const WORK_GROUPS = [
     id: "contract",
     name: "계약·공사·보험",
     description: "계약부터 공사·보험·버스 서류까지",
-    toolIds: ["contract-kockgum", "contract-doc-support", "construction-hub", "insur-kockgum", "bus-kockgum"]
+    toolIds: ["contract-kockgum", "contract-doc-support", "poomshot", "construction-hub", "insur-kockgum", "bus-kockgum"]
   },
   {
     id: "document",
@@ -261,7 +261,7 @@ const WORK_GROUPS = [
   }
 ];
 
-const LIFE_TOOL_IDS = ["today-school", "my-child-school", "school-calendar"];
+const LIFE_TOOL_IDS = ["today-school", "my-child-school"];
 const LAB_TOOL_IDS = ["ansa"];
 
 const FEATURED_IDS = [
@@ -879,7 +879,7 @@ function renderPomodoro(statusMessage = "") {
   pomodoroCard.classList.toggle("is-rest", !isFocus);
   document.title = pomodoro.running
     ? `${formatPomodoro(remaining)} · ${isFocus ? "집중 중" : "휴식 중"} | 학돌시작`
-    : "학돌시작 v0.4.0 | 행정실에서 시작한 실무 도구";
+    : "학돌시작 v0.4.1 | 행정실에서 시작한 실무 도구";
 }
 
 function stopPomodoroTicker() {
