@@ -694,3 +694,35 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .search-examples span { width: 100%; }
   .brand-footer .footer-meta { flex-wrap: wrap; }
 }
+
+
+/* v0.5.0 — 품샷 공개 + 업추비 3% + 세금계산서 저장 확장도구 */
+.compact-tool-card.has-meta,
+.compact-tool-card.has-meta .tool-card-link { min-height: 124px; }
+.compact-tool-badge,
+.compact-tool-note {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 6px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 850;
+  line-height: 1.2;
+}
+.compact-tool-badge {
+  background: #eef3ff;
+  color: #596a9b;
+}
+.compact-tool-note {
+  border-radius: 7px;
+  background: #fff7df;
+  color: #8a6a20;
+}
+@media (max-width: 540px) {
+  .compact-tool-card.has-meta,
+  .compact-tool-card.has-meta .tool-card-link { min-height: 100px; }
+  .compact-tool-note { white-space: normal; }
+}

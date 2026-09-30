@@ -126,12 +126,25 @@ const tools = [
     id: "poomshot",
     name: "품샷",
     category: "계약·구매",
-    description: "견적서 PDF를 바탕으로 품의서 본문과 에듀파인 업로드용 엑셀 작성을 돕는 도구입니다.",
-    tags: ["품샷", "견적서", "품의", "에듀파인", "엑셀", "구매"],
-    status: "비공개",
+    description: "온라인쇼핑몰 견적서를 읽어 품의 작성과 엑셀 정리를 도와주는 도구입니다.",
+    tags: ["품샷", "견적서", "온라인쇼핑몰", "품의", "에듀파인", "엑셀", "구매", "OCR"],
+    status: "운영중",
     icon: "📸",
-    url: "",
-    updated: "비공개"
+    url: "https://pumshot.onrender.com/",
+    updated: "2026.09",
+    note: "처음 접속 시 서버가 깨어나는 동안 잠시 걸릴 수 있어요."
+  },
+  {
+    id: "tax-invoice-saver",
+    name: "세금계산서 저장",
+    category: "계약·구매",
+    description: "전자세금계산서의 작성일·업체명·품명을 읽어 PDF 파일명을 자동으로 정리하는 브라우저 확장도구입니다.",
+    tags: ["세금계산서", "전자세금계산서", "PDF", "파일명", "자동저장", "Chrome", "Whale", "확장프로그램", "확장앱", "구매"],
+    status: "운영중",
+    icon: "🧾",
+    url: "https://github.com/sen-vip/hakdol-tax-invoice-saver",
+    updated: "2026.09",
+    badge: "Chrome · Whale 확장"
   },
   {
     id: "insur-kockgum",
@@ -164,6 +177,17 @@ const tools = [
     status: "운영중",
     icon: "📊",
     url: "https://budget-visualizer-delta.vercel.app/",
+    updated: "2026.09"
+  },
+  {
+    id: "upchubi-3per",
+    name: "업추비 3%",
+    category: "예산·회계",
+    description: "학교운영경비 대비 일반업무추진비가 3% 이내인지 파일 업로드 또는 직접 입력으로 확인합니다.",
+    tags: ["업추비", "업무추진비", "3%", "학교운영경비", "201", "104", "세입실적", "성질별 세출실적", "추경", "예산"],
+    status: "운영중",
+    icon: "🧮",
+    url: "https://sen-vip.github.io/upchubi-3per/",
     updated: "2026.09"
   },
   {
@@ -245,13 +269,13 @@ const WORK_GROUPS = [
     id: "budget",
     name: "예산·회계",
     description: "예산·카드·업무추진비를 판단하기 쉽게",
-    toolIds: ["budget-visualizer", "school-card-map", "edu-card-map"]
+    toolIds: ["budget-visualizer", "upchubi-3per", "school-card-map", "edu-card-map"]
   },
   {
     id: "contract",
-    name: "계약·공사·보험",
-    description: "계약부터 공사·보험·버스 서류까지",
-    toolIds: ["contract-kockgum", "contract-doc-support", "poomshot", "construction-hub", "insur-kockgum", "bus-kockgum"]
+    name: "계약·구매·공사",
+    description: "계약·구매부터 공사·보험·버스 서류까지",
+    toolIds: ["contract-kockgum", "contract-doc-support", "poomshot", "tax-invoice-saver", "construction-hub", "insur-kockgum", "bus-kockgum"]
   },
   {
     id: "document",
@@ -356,6 +380,8 @@ function renderToolCard(tool) {
         <span class="compact-tool-copy">
           <strong>${tool.name}${tool.isNew ? ' <em class="inline-new-badge">NEW</em>' : ''}</strong>
           <small>${tool.description}</small>
+          ${tool.badge ? `<span class="compact-tool-badge">${tool.badge}</span>` : ''}
+          ${tool.note ? `<span class="compact-tool-note">${tool.note}</span>` : ''}
         </span>
         <span class="compact-tool-arrow" aria-hidden="true">→</span>
       </a>`
@@ -369,7 +395,7 @@ function renderToolCard(tool) {
       </div>`;
 
   return `
-    <article class="compact-tool-card ${tool.url ? "" : "is-unavailable"}" data-id="${tool.id}">
+    <article class="compact-tool-card ${tool.url ? "" : "is-unavailable"} ${tool.note || tool.badge ? "has-meta" : ""}" data-id="${tool.id}">
       ${action}
       <button class="favorite-btn compact-favorite ${isFavorite ? "active" : ""}" type="button" aria-label="${tool.name} 즐겨찾기" data-favorite="${tool.id}">
         ${isFavorite ? "★" : "☆"}
