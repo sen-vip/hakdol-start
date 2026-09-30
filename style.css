@@ -726,3 +726,83 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .compact-tool-card.has-meta .tool-card-link { min-height: 100px; }
   .compact-tool-note { white-space: normal; }
 }
+
+
+/* v0.5.1 — 세금계산서 저장: 바로 다운로드 + 설치 방법 이중 버튼 */
+.compact-tool-card:has(.compact-tool-actions),
+.compact-tool-card:has(.compact-tool-actions) .tool-card-link {
+  min-height: 150px;
+}
+.tool-card-link.has-actions {
+  cursor: default;
+}
+.compact-tool-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 9px;
+}
+.compact-tool-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+}
+.compact-tool-action:hover {
+  transform: translateY(-1px);
+}
+.compact-tool-action.is-primary {
+  background: #2f5fd0;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(47, 95, 208, .18);
+}
+.compact-tool-action.is-secondary {
+  border: 1px solid #dbe3f3;
+  background: #fff;
+  color: #4f5f7c;
+}
+@media (max-width: 540px) {
+  .compact-tool-card:has(.compact-tool-actions),
+  .compact-tool-card:has(.compact-tool-actions) .tool-card-link { min-height: 132px; }
+  .compact-tool-actions { gap: 5px; }
+  .compact-tool-action { min-height: 29px; padding: 6px 9px; }
+}
+
+
+/* v0.5.4 — 기존 메인 문구 유지 + 계약·구매·공사 왼쪽 정렬 */
+.brand-hero h1 {
+  max-width: 820px;
+}
+.brand-hero .hero-desc {
+  max-width: 830px;
+}
+
+/* 계약·구매·공사: 다른 업무군처럼 동일 폭 3열로 왼쪽부터 배치 */
+.contract-flow-row .category-tool-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.contract-flow-row .compact-tool-card:nth-child(n) {
+  grid-column: auto;
+}
+.contract-flow-row .tool-category-label {
+  background: linear-gradient(155deg, #edf8f4, #f4fbf8);
+}
+
+@media (max-width: 920px) {
+  .contract-flow-row .category-tool-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .contract-flow-row .category-tool-grid {
+    grid-template-columns: 1fr;
+  }
+}

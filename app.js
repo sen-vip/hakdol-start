@@ -144,7 +144,20 @@ const tools = [
     icon: "🧾",
     url: "https://github.com/sen-vip/hakdol-tax-invoice-saver",
     updated: "2026.09",
-    badge: "Chrome · Whale 확장"
+    badge: "Chrome · Whale 확장",
+    actions: [
+      {
+        label: "바로 다운로드",
+        url: "https://github.com/sen-vip/hakdol-tax-invoice-saver/releases/latest/download/hakdol-tax-invoice-saver.zip",
+        kind: "primary",
+        download: true
+      },
+      {
+        label: "설치 방법",
+        url: "https://github.com/sen-vip/hakdol-tax-invoice-saver#readme",
+        kind: "secondary"
+      }
+    ]
   },
   {
     id: "insur-kockgum",
@@ -275,7 +288,7 @@ const WORK_GROUPS = [
     id: "contract",
     name: "계약·구매·공사",
     description: "계약·구매부터 공사·보험·버스 서류까지",
-    toolIds: ["contract-kockgum", "contract-doc-support", "poomshot", "tax-invoice-saver", "construction-hub", "insur-kockgum", "bus-kockgum"]
+    toolIds: ["poomshot", "contract-kockgum", "contract-doc-support", "tax-invoice-saver", "construction-hub", "insur-kockgum", "bus-kockgum"]
   },
   {
     id: "document",
@@ -374,28 +387,37 @@ function renderFeaturedTools() {
 
 function renderToolCard(tool) {
   const isFavorite = state.favorites.has(tool.id);
-  const action = tool.url
-    ? `<a class="tool-card-link" href="${tool.url}" target="_blank" rel="noopener noreferrer" data-open-tool="${tool.id}">
+  const hasActions = Array.isArray(tool.actions) && tool.actions.length > 0;
+  const toolMeta = `
         <span class="compact-tool-icon" aria-hidden="true">${tool.icon}</span>
         <span class="compact-tool-copy">
           <strong>${tool.name}${tool.isNew ? ' <em class="inline-new-badge">NEW</em>' : ''}</strong>
           <small>${tool.description}</small>
           ${tool.badge ? `<span class="compact-tool-badge">${tool.badge}</span>` : ''}
           ${tool.note ? `<span class="compact-tool-note">${tool.note}</span>` : ''}
-        </span>
-        <span class="compact-tool-arrow" aria-hidden="true">→</span>
-      </a>`
-    : `<div class="tool-card-link is-disabled" title="${tool.name}은 현재 바로 열기 링크가 없습니다.">
-        <span class="compact-tool-icon" aria-hidden="true">${tool.icon}</span>
-        <span class="compact-tool-copy">
-          <strong>${tool.name}</strong>
-          <small>${tool.description}</small>
-          <span class="compact-tool-status">${disabledLabel(tool)}</span>
-        </span>
-      </div>`;
+          ${hasActions ? `<span class="compact-tool-actions">
+            ${tool.actions.map(item => `<a class="compact-tool-action ${item.kind === "primary" ? "is-primary" : "is-secondary"}" href="${item.url}" ${item.download ? '' : 'target="_blank" rel="noopener noreferrer"'}>${item.label}</a>`).join("")}
+          </span>` : ''}
+        </span>`;
+
+  const action = hasActions
+    ? `<div class="tool-card-link has-actions">${toolMeta}</div>`
+    : tool.url
+      ? `<a class="tool-card-link" href="${tool.url}" target="_blank" rel="noopener noreferrer" data-open-tool="${tool.id}">
+          ${toolMeta}
+          <span class="compact-tool-arrow" aria-hidden="true">→</span>
+        </a>`
+      : `<div class="tool-card-link is-disabled" title="${tool.name}은 현재 바로 열기 링크가 없습니다.">
+          <span class="compact-tool-icon" aria-hidden="true">${tool.icon}</span>
+          <span class="compact-tool-copy">
+            <strong>${tool.name}</strong>
+            <small>${tool.description}</small>
+            <span class="compact-tool-status">${disabledLabel(tool)}</span>
+          </span>
+        </div>`;
 
   return `
-    <article class="compact-tool-card ${tool.url ? "" : "is-unavailable"} ${tool.note || tool.badge ? "has-meta" : ""}" data-id="${tool.id}">
+    <article class="compact-tool-card ${tool.url || hasActions ? "" : "is-unavailable"} ${tool.note || tool.badge || hasActions ? "has-meta" : ""}" data-id="${tool.id}">
       ${action}
       <button class="favorite-btn compact-favorite ${isFavorite ? "active" : ""}" type="button" aria-label="${tool.name} 즐겨찾기" data-favorite="${tool.id}">
         ${isFavorite ? "★" : "☆"}
@@ -406,7 +428,7 @@ function renderToolCard(tool) {
 
 function renderGroupRow(group, groupTools) {
   return `
-    <section class="tool-category-row" id="group-${group.id}" aria-labelledby="group-title-${group.id}">
+    <section class="tool-category-row ${group.id === "contract" ? "contract-flow-row" : ""}" id="group-${group.id}" aria-labelledby="group-title-${group.id}">
       <div class="tool-category-label">
         <h3 id="group-title-${group.id}">${group.name}</h3>
         <p>${group.description}</p>
@@ -905,7 +927,7 @@ function renderPomodoro(statusMessage = "") {
   pomodoroCard.classList.toggle("is-rest", !isFocus);
   document.title = pomodoro.running
     ? `${formatPomodoro(remaining)} · ${isFocus ? "집중 중" : "휴식 중"} | 학돌시작`
-    : "학돌시작 v0.4.1 | 행정실에서 시작한 실무 도구";
+    : "학돌시작 v0.5.4 | 행정실에서 시작한 실무 도구";
 }
 
 function stopPomodoroTicker() {
