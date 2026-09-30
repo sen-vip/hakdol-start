@@ -95,7 +95,7 @@ const tools = [
     category: "인사·급여",
     description: "세콤매니저 출입기록을 급여·초과근무 확인에 쓰기 좋은 형식으로 변환합니다. 상세 설명은 블로그에서 연결할 예정입니다.",
     tags: ["급여", "초과근무", "세콤", "에스원", "변환", "블로그"],
-    status: "준비중",
+    status: "링크 준비중",
     icon: "⏱️",
     url: "",
     updated: "준비중"
@@ -142,7 +142,7 @@ const tools = [
     tags: ["세금계산서", "전자세금계산서", "PDF", "파일명", "자동저장", "Chrome", "Whale", "확장프로그램", "확장앱", "구매"],
     status: "운영중",
     icon: "🧾",
-    url: "https://github.com/sen-vip/hakdol-tax-invoice-saver",
+    url: "https://github.com/sen-vip/hakdol-tax-invoice-saver#-%EC%84%A4%EC%B9%98",
     updated: "2026.09",
     badge: "Chrome · Whale 확장",
     actions: [
