@@ -53,7 +53,8 @@ const tools = [
     status: "운영중",
     icon: "📥",
     url: "https://sen-vip.github.io/jechul-moa/",
-    updated: "2026.07"
+    updated: "2026.07",
+    isBeta: true
   },
   {
     id: "inside-travel-kockgum",
@@ -109,7 +110,8 @@ const tools = [
     status: "운영중",
     icon: "📑",
     url: "https://sen-vip.github.io/contract-kockgum/",
-    updated: "2026.08"
+    updated: "2026.08",
+    isBeta: true
   },
   {
     id: "contract-doc-support",
@@ -154,7 +156,7 @@ const tools = [
       },
       {
         label: "설치 방법",
-        url: "https://github.com/sen-vip/hakdol-tax-invoice-saver#readme",
+        url: "https://github.com/sen-vip/hakdol-tax-invoice-saver#-%EC%84%A4%EC%B9%98",
         kind: "secondary"
       }
     ]
@@ -168,7 +170,8 @@ const tools = [
     status: "운영중",
     icon: "🛡️",
     url: "https://sen-vip.github.io/boheom-kockgum/",
-    updated: "2026.06"
+    updated: "2026.06",
+    isBeta: true
   },
   {
     id: "bus-kockgum",
@@ -288,13 +291,19 @@ const WORK_GROUPS = [
     id: "contract",
     name: "계약·구매·공사",
     description: "계약·구매부터 공사·보험·버스 서류까지",
-    toolIds: ["poomshot", "contract-kockgum", "contract-doc-support", "tax-invoice-saver", "construction-hub", "insur-kockgum", "bus-kockgum"]
+    toolIds: ["poomshot", "construction-hub", "contract-doc-support", "tax-invoice-saver", "bus-kockgum", "insur-kockgum", "contract-kockgum"]
   },
   {
     id: "document",
-    name: "문서·인사",
-    description: "공문·제출·출장·초과근무·경력 실무",
-    toolIds: ["gongmun-fit", "jechul-moa", "inside-travel-kockgum", "overtime", "career-certificate", "payroll-overtime-converter"]
+    name: "문서·업무지원",
+    description: "공문·출장·제출 업무를 빠르게",
+    toolIds: ["gongmun-fit", "inside-travel-kockgum", "jechul-moa"]
+  },
+  {
+    id: "hr",
+    name: "인사·급여",
+    description: "경력·초과근무·급여 실무를 간단하게",
+    toolIds: ["career-certificate", "overtime", "payroll-overtime-converter"]
   }
 ];
 
@@ -376,7 +385,7 @@ function renderFeaturedTools() {
         <span class="featured-copy">
           <span class="featured-title-row">
             <strong>${tool.name}</strong>
-            ${tool.isNew ? '<em class="new-badge">NEW</em>' : ''}
+            ${tool.isNew ? '<em class="new-badge">NEW</em>' : ''}${tool.isBeta ? '<em class="beta-badge">BETA</em>' : ''}
           </span>
           <small>${tool.description}</small>
         </span>
@@ -391,7 +400,7 @@ function renderToolCard(tool) {
   const toolMeta = `
         <span class="compact-tool-icon" aria-hidden="true">${tool.icon}</span>
         <span class="compact-tool-copy">
-          <strong>${tool.name}${tool.isNew ? ' <em class="inline-new-badge">NEW</em>' : ''}</strong>
+          <strong>${tool.name}${tool.isNew ? ' <em class="inline-new-badge">NEW</em>' : ''}${tool.isBeta ? ' <em class="inline-beta-badge">BETA</em>' : ''}</strong>
           <small>${tool.description}</small>
           ${tool.badge ? `<span class="compact-tool-badge">${tool.badge}</span>` : ''}
           ${tool.note ? `<span class="compact-tool-note">${tool.note}</span>` : ''}

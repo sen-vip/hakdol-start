@@ -612,7 +612,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .search-examples button:hover { border-color: rgba(101,88,232,.3); background: var(--violet-soft); color: var(--violet-dark); }
 .discovery-section .search-results { max-width: none; }
-.work-shortcuts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 9px; margin-top: 16px; }
+.work-shortcuts { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 9px; margin-top: 16px; }
 .work-shortcuts a {
   display: grid;
   grid-template-columns: 34px minmax(0,1fr);
@@ -659,7 +659,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .footer-brand-copy strong { font-size: 13px; }
 .footer-brand-copy span { color: var(--muted); line-height: 1.5; }
 
-/* 4개 업무군에 맞춘 구분 색 */
+/* 5개 업무군에 맞춘 구분 색 */
 .tool-category-row:nth-child(1) .tool-category-label { background: #f2f5ff; }
 .tool-category-row:nth-child(2) .tool-category-label { background: #eef7fb; }
 .tool-category-row:nth-child(3) .tool-category-label { background: #eff8f5; }
@@ -806,3 +806,29 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
     grid-template-columns: 1fr;
   }
 }
+
+
+/* BETA — 카드 높이를 늘리지 않는 제목 옆 보조 배지 */
+.beta-badge,
+.inline-beta-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  padding: 2px 5px;
+  border-radius: 999px;
+  background: #f2f0ff;
+  color: #7468b5;
+  font-style: normal;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  vertical-align: middle;
+}
+.inline-beta-badge {
+  margin-left: 4px;
+  transform: translateY(-1px);
+}
+
+/* 5개 업무군 색상 통일 */
+.tool-category-row:nth-child(5) .tool-category-label { background: #f7f4f0; }
